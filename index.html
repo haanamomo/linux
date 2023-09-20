@@ -4,6 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Linux Manual</title>
+
     <style>
         /* Reset styles */
         * {
@@ -43,10 +44,10 @@
             padding: 1rem;
         }
 
-        .main {
+        #blogs {
             flex: 1;
-            padding: 1rem;
             background-color: #fff;
+            padding: 40px;
         }
 
         header {
@@ -85,13 +86,7 @@
             margin-bottom: 3rem;
         }
 
-        footer {
-            background-color: #333;
-            color: #fff;
-            padding: 1rem;
-            text-align: center;
-            margin-top: auto;
-        }
+
 
         .hidden {
             display: none;
@@ -133,6 +128,7 @@
         }
 
         article h2 {
+            margin-top: 0;
             font-size: 24px;
         }
 
@@ -155,7 +151,7 @@
         article p {
             margin-top: 8px;
             margin-bottom: 8px;
-
+            line-height: 1.6;
         }
 
         article ul,
@@ -164,7 +160,7 @@
             margin-bottom: 16px;
         }
 
-        article li>p {
+        article li {
             margin-top: 8px;
             margin-bottom: 8px;
         }
@@ -192,6 +188,8 @@
         }
 
         article code {
+            background-color: rgba(243,243,243);
+
             font-family: SFMono-Regular, Consolas, Liberation Mono, Menlo, monospace;
             font-size: 14px;
             padding: 0.2em 0.4em;
@@ -201,13 +199,14 @@
         article pre {
             font-family: SFMono-Regular, Consolas, Liberation Mono, Menlo, monospace;
             font-size: 14px;
-            background-color: rgba(27, 31, 35, .05);
+            background-color: rgba(243,243,243);
             padding: 16px;
             border-radius: 3px;
             overflow: auto;
         }
 
         article pre code {
+
             display: block;
             padding: 0;
             margin: 0;
@@ -258,6 +257,41 @@
             background-color: yellow;
         }
 
+        footer {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            padding: 20px 30px;
+
+            background-color: #333;
+            color: #fff;
+            margin-top: auto;
+            height: 9rem
+        }
+
+        .footer-column {
+            flex-basis: calc(50% - 15px);
+        }
+
+        .footer-column ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        .footer-column li {
+            margin-bottom: 4px;
+        }
+
+        .footer-column a {
+            color: white;
+            text-decoration: none;
+        }
+
+        .footer-column a:hover {
+            text-decoration: underline;
+        }
+
 
         /* Media queries */
         @media screen and (min-width: 768px) {
@@ -273,9 +307,7 @@
                 left: 0;
             }
 
-            .main {
-                padding: 40px;
-            }
+
         }
     </style>
 </head>
@@ -284,83 +316,90 @@
 
     <div class="sidebar">
         <h2 class="blog-title">Menu</h2>
-        <a href="#blog1" class="blog-link active"></a>
-        <a href="#blog2" class="blog-link"></a>
-        <a href="#blog3" class="blog-link"></a>
     </div>
     <div class="container">
         <header>
             <h1>Linux Manual</h1>
         </header>
-        <div class="main">
-            <article id="blog1">
-                <h2>ubuntu/lubuntu开机进入命令行</h2>
-                <p>Ubuntu或者Lubuntu开机后无限重载，左上角显示闪烁的小光标。</p>
-                <p>开机直接进入命令行：</p>
-                <ol>
-                    <li>选择系统界面选择<code>Ubuntu</code>，按<code>e</code></li>
-                    <li>在倒数第2行的最后加上<code>3</code>, 按<code>F10</code></li>
-                </ol>
-
-            </article>
-            <article id="blog2" class="hidden">
-                <h2>ubuntu/lubuntu修改终端字体</h2>
-                <pre><code>ls /usr/share/consolefonts
-setfont Uni3-TerminusBold32x16.psf.gz
-echo 'setfont 字体名字'  &gt;&gt; /etc/bashrc
-</code></pre>
-
-            </article>
-            <article id="blog3" class="hidden">
-                <h2>ubuntu/lubuntu加快开机速度</h2>
-                <p>检查开机速度</p>
-                <pre><code>systemd-analyze blame
-</code></pre>
-                <p>禁用开机项，<code>.device</code>是挂载，不能disable</p>
-                <pre><code>sudo systemctl disable NetworkManager-dispatch.service
-sudo systemctl disable NetworkManager-wait-online.service
-
-sudo apt remove snapd
-</code></pre>
-
-            </article>
-
+        <div id="blogs">
         </div>
         <footer>
-            <p>Copyright &copy; 2021 Linux Manual</p>
+            <div class="footer-column">
+
+                <ul>
+                    <li><a href="https://haanamomo.github.io/linux/">Linux Manual</a></li>
+                    <li><a href="https://haanamomo.github.io/windows/">Windows Manual</a></li>
+                    <li><a href="https://haanamomo.github.io/mac/">Mac Manual</a></li>
+ 
+                </ul>
+            </div>
+            <div  class="footer-column">
+                <ul>
+                    <li><a href="https://haanamomo.github.io/tools/">Tools</a></li>
+                <li><a href="https://haanamomo.com">Others</a></li>
+                </ul>
+            </div>
         </footer>
     </div>
 
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+
     <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            const blogLinks = document.querySelectorAll('.blog-link');
+        const blogContainer = document.getElementById('blogs');
 
-            blogLinks.forEach(function (link) {
-                const blogId = link.getAttribute('href').substring(1);
-                const blogDiv = document.getElementById(blogId);
+        fetch('blogs.md')
+            .then(response => response.text())
+            .then(blogs => {
+                const blogHtml = blogs.split(/^\#\# /gm).map(blog => {
+                    console.log(blog)
+                    if (blog.trim()) {
+                        const content = marked.parse('## ' + blog);
+                        return `<article>${content}</article>`;
+                    }
+                }).join('');
 
-                if (blogDiv) {
-                    const blogTitle = blogDiv.querySelector('h2').textContent;
-                    link.textContent = blogTitle;
-                }
+                blogContainer.innerHTML = blogHtml;
+                const articles = blogContainer.querySelectorAll('article');
+
+                // Create a menu item for each article
+                const menu = document.querySelector('.sidebar');
+                articles.forEach((article, index) => {
+                    article.id = `blog${index + 1}`;
+                    const menuItem = document.createElement('a');
+                    menuItem.href = `#${article.id}`;
+                    menuItem.textContent = article.querySelector('h2').textContent;
+                    menuItem.classList.add('blog-link');
+
+                    // Add the menu item to the menu container
+                    menu.appendChild(menuItem);
+
+                    // Set the first menu item as active by default
+                    if (index === 0) {
+                        menuItem.classList.add('active');
+                    } else {
+                        article.classList.add('hidden');
+                    }
+
+                });
+
+                const blogLinks = document.querySelectorAll('.blog-link');
+
+                blogLinks.forEach((link) => {
+                    link.addEventListener('click', (event) => {
+                        event.preventDefault();
+                        const articleId = link.getAttribute('href');
+                        const activeLink = document.querySelector('.blog-link.active');
+                        activeLink.classList.remove('active');
+                        link.classList.add('active');
+                        const activeArticle = document.querySelector('#blogs article:not(.hidden)');
+                        activeArticle.classList.add('hidden');
+                        const articleToShow = document.querySelector(articleId);
+                        articleToShow.classList.remove('hidden');
+                    });
+                });
+
             });
-        });
 
-        // Toggle active class on blog links
-        const blogLinks = document.querySelectorAll('.blog-link');
-        blogLinks.forEach((link) => {
-            link.addEventListener('click', (event) => {
-                event.preventDefault();
-                const articleId = link.getAttribute('href');
-                const activeLink = document.querySelector('.blog-link.active');
-                activeLink.classList.remove('active');
-                link.classList.add('active');
-                const activeArticle = document.querySelector('.main article:not(.hidden)');
-                activeArticle.classList.add('hidden');
-                const articleToShow = document.querySelector(articleId);
-                articleToShow.classList.remove('hidden');
-            });
-        });
     </script>
 </body>
 
