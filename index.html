@@ -4,7 +4,6 @@
 <head>
     <meta charset="UTF-8">
     <title>Linux Manual</title>
-    <link rel="stylesheet" type="text/css" href="https://gist.githubusercontent.com/haanamomo/8faf4c075a493855e208e2ad40e12134/raw/htmlBlogs.css">
 </head>
 
 <body>
@@ -19,25 +18,28 @@
         <div id="blogs">
         </div>
         <footer>
-            <div class="footer-column">
-
-                <ul>
-                    <li><a href="https://haanamomo.github.io/linux/">Linux Manual</a></li>
-                    <li><a href="https://haanamomo.github.io/windows/">Windows Manual</a></li>
-                    <li><a href="https://haanamomo.github.io/mac/">Mac Manual</a></li>
- 
-                </ul>
-            </div>
-            <div  class="footer-column">
-                <ul>
-                    <li><a href="https://haanamomo.github.io/tools/">Tools</a></li>
-                <li><a href="https://haanamomo.com">Others</a></li>
-                </ul>
-            </div>
+            
         </footer>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+
+    <script>
+    fetch('https://gist.githubusercontent.com/haanamomo/8faf4c075a493855e208e2ad40e12134/raw/htmlBlogs.css')
+      .then(response => response.text())
+      .then(css => {
+        const style = document.createElement('style');
+        style.innerHTML = css;
+        document.head.appendChild(style);
+      });
+      
+      fetch('https://gist.githubusercontent.com/haanamomo/188d39ac92cce778305d2e27fb1bdc94/raw/htmlFooter.html')
+      .then(response => response.text())
+      .then(html => {
+        const footer = document.getElementsByTagName('footer')[0];
+        footer.innerHTML = html;
+      });
+    </script>
 
     <script>
         const blogContainer = document.getElementById('blogs');
@@ -74,18 +76,17 @@
                     } else {
                         article.classList.add('hidden');
                     }
-
                 });
 
-                const blogLinks = document.querySelectorAll('.blog-link');
+                const menuButtons = document.querySelectorAll('.blog-link');
 
-                blogLinks.forEach((link) => {
-                    link.addEventListener('click', (event) => {
+                menuButtons.forEach((button) => {
+                    button.addEventListener('click', (event) => {
                         event.preventDefault();
-                        const articleId = link.getAttribute('href');
+                        const articleId = button.getAttribute('href');
                         const activeLink = document.querySelector('.blog-link.active');
                         activeLink.classList.remove('active');
-                        link.classList.add('active');
+                        button.classList.add('active');
                         const activeArticle = document.querySelector('#blogs article:not(.hidden)');
                         activeArticle.classList.add('hidden');
                         const articleToShow = document.querySelector(articleId);
