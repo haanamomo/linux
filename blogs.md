@@ -11,7 +11,7 @@ Ubuntu或者Lubuntu开机后无限重载，左上角显示闪烁的小光标。
 
     ls /usr/share/consolefonts
     setfont Uni3-TerminusBold32x16.psf.gz
-    echo 'setfont 字体名字'  >> /etc/bashrc
+    echo 'setfont 字体名字'  >> /etc/profile
     
 
 ## ubuntu/lubuntu加快开机速度
