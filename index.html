@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Linux Manual</title>
+    <style>
+        /* Reset styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Global styles */
+        body {
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+            font-size: 16px;
+            line-height: 1.5;
+            background-color: #f2f2f2;
+        }
+
+        a {
+            text-decoration: none;
+            color: #333;
+        }
+
+        a:hover {
+            color: #666;
+        }
+
+        /* Layout styles */
+        .container {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        .sidebar {
+            width: 200px;
+            background-color: #fff;
+            border-right: 1px solid #ddd;
+            padding: 1rem;
+        }
+
+        .main {
+            flex: 1;
+            padding: 1rem;
+            background-color: #fff;
+        }
+
+        header {
+            background-color: #333;
+            color: #fff;
+            padding: 1rem;
+            text-align: center;
+        }
+
+        h1,
+        h2,
+        h3 {
+            margin-top: 0;
+        }
+
+        .blog-title {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .blog-link {
+            display: block;
+            padding: 0.5rem;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .blog-link:last-child {
+            border-bottom: none;
+        }
+
+        .blog-link.active {
+            background-color: #f2f2f2;
+        }
+
+        article {
+            margin-bottom: 3rem;
+        }
+
+        footer {
+            background-color: #333;
+            color: #fff;
+            padding: 1rem;
+            text-align: center;
+            margin-top: auto;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        /* GitHub 主题样式 */
+        article {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+            line-height: 1.5;
+            color: #24292e;
+            background-color: #fff;
+            margin: 0;
+            padding: 0;
+        }
+
+        article a {
+            color: #0366d6;
+            text-decoration: none;
+        }
+
+        article a:hover {
+            text-decoration: underline;
+        }
+
+        article h1,
+        article h2,
+        article h3,
+        article h4,
+        article h5,
+        article h6 {
+            margin-top: 24px;
+            margin-bottom: 16px;
+            font-weight: 600;
+            line-height: 1.25;
+        }
+
+        article h1 {
+            font-size: 32px;
+        }
+
+        article h2 {
+            font-size: 24px;
+        }
+
+        article h3 {
+            font-size: 20px;
+        }
+
+        article h4 {
+            font-size: 16px;
+        }
+
+        article h5 {
+            font-size: 14px;
+        }
+
+        article h6 {
+            font-size: 12px;
+        }
+
+        article p {
+            margin-top: 8px;
+            margin-bottom: 8px;
+
+        }
+
+        article ul,
+        article ol {
+            margin-top: 0;
+            margin-bottom: 16px;
+        }
+
+        article li>p {
+            margin-top: 8px;
+            margin-bottom: 8px;
+        }
+
+        article table {
+            border-collapse: collapse;
+            width: 100%;
+            margin-top: 16px;
+            margin-bottom: 16px;
+        }
+
+        article table th,
+        article table td {
+            border: 1px solid #dfe2e5;
+            padding: 6px 13px;
+        }
+
+        article table th {
+            font-weight: 600;
+        }
+
+        article img {
+            max-width: 100%;
+            height: auto;
+        }
+
+        article code {
+            font-family: SFMono-Regular, Consolas, Liberation Mono, Menlo, monospace;
+            font-size: 14px;
+            padding: 0.2em 0.4em;
+            border-radius: 3px;
+        }
+
+        article pre {
+            font-family: SFMono-Regular, Consolas, Liberation Mono, Menlo, monospace;
+            font-size: 14px;
+            background-color: rgba(27, 31, 35, .05);
+            padding: 16px;
+            border-radius: 3px;
+            overflow: auto;
+        }
+
+        article pre code {
+            display: block;
+            padding: 0;
+            margin: 0;
+        }
+
+        article blockquote {
+            margin: 0;
+            margin-left: 1em;
+            padding-left: 1em;
+            border-left: 4px solid #dfe2e5;
+            color: #6a737d;
+        }
+
+        article hr {
+            border: 0;
+            border-bottom: 1px solid #dfe2e5;
+            margin: 24px 0;
+        }
+
+        article kbd {
+            font-family: SFMono-Regular, Consolas, Liberation Mono, Menlo, monospace;
+            font-size: 14px;
+            background-color: #fafbfc;
+            border: 1px solid #d1d5da;
+            border-radius: 3px;
+            box-shadow: inset 0 -1px 0 #d1d5da;
+            padding: 4px 8px;
+            display: inline-block;
+            line-height: 1;
+        }
+
+        article mark {
+            background-color: #fffbdd;
+            padding: 0.2em 0.4em;
+            border-radius: 2px;
+            color: #333;
+        }
+
+        article .del {
+            color: #cb2431;
+        }
+
+        article .ins {
+            background-color: #add8e6;
+        }
+
+        article .highlight {
+            background-color: yellow;
+        }
+
+
+        /* Media queries */
+        @media screen and (min-width: 768px) {
+            .container {
+                flex-direction: column;
+                margin-left: 200px
+            }
+
+            .sidebar {
+                height: 100vh;
+                position: fixed;
+                top: 0;
+                left: 0;
+            }
+
+            .main {
+                padding: 40px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="sidebar">
+        <h2 class="blog-title">Menu</h2>
+        <a href="#blog1" class="blog-link active"></a>
+        <a href="#blog2" class="blog-link"></a>
+        <a href="#blog3" class="blog-link"></a>
+    </div>
+    <div class="container">
+        <header>
+            <h1>Linux Manual</h1>
+        </header>
+        <div class="main">
+            <article id="blog1">
+                <h2>ubuntu/lubuntu开机进入命令行</h2>
+                <p>Ubuntu或者Lubuntu开机后无限重载，左上角显示闪烁的小光标。</p>
+                <p>开机直接进入命令行：</p>
+                <ol>
+                    <li>选择系统界面选择<code>Ubuntu</code>，按<code>e</code></li>
+                    <li>在倒数第2行的最后加上<code>3</code>, 按<code>F10</code></li>
+                </ol>
+
+            </article>
+            <article id="blog2" class="hidden">
+                <h2>ubuntu/lubuntu修改终端字体</h2>
+                <pre><code>ls /usr/share/consolefonts
+setfont Uni3-TerminusBold32x16.psf.gz
+echo 'setfont 字体名字'  &gt;&gt; /etc/bashrc
+</code></pre>
+
+            </article>
+            <article id="blog3" class="hidden">
+                <h2>ubuntu/lubuntu加快开机速度</h2>
+                <p>检查开机速度</p>
+                <pre><code>systemd-analyze blame
+</code></pre>
+                <p>禁用开机项，<code>.device</code>是挂载，不能disable</p>
+                <pre><code>sudo systemctl disable NetworkManager-dispatch.service
+sudo systemctl disable NetworkManager-wait-online.service
+
+sudo apt remove snapd
+</code></pre>
+
+            </article>
+
+        </div>
+        <footer>
+            <p>Copyright &copy; 2021 Linux Manual</p>
+        </footer>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const blogLinks = document.querySelectorAll('.blog-link');
+
+            blogLinks.forEach(function (link) {
+                const blogId = link.getAttribute('href').substring(1);
+                const blogDiv = document.getElementById(blogId);
+
+                if (blogDiv) {
+                    const blogTitle = blogDiv.querySelector('h2').textContent;
+                    link.textContent = blogTitle;
+                }
+            });
+        });
+
+        // Toggle active class on blog links
+        const blogLinks = document.querySelectorAll('.blog-link');
+        blogLinks.forEach((link) => {
+            link.addEventListener('click', (event) => {
+                event.preventDefault();
+                const articleId = link.getAttribute('href');
+                const activeLink = document.querySelector('.blog-link.active');
+                activeLink.classList.remove('active');
+                link.classList.add('active');
+                const activeArticle = document.querySelector('.main article:not(.hidden)');
+                activeArticle.classList.add('hidden');
+                const articleToShow = document.querySelector(articleId);
+                articleToShow.classList.remove('hidden');
+            });
+        });
+    </script>
+</body>
+
+</html>
