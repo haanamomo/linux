@@ -47,10 +47,10 @@
         fetch('blogs.md')
             .then(response => response.text())
             .then(blogs => {
-                const blogHtml = blogs.split(/^\# /gm).map(blog => {
+                const blogHtml = blogs.split(/^\## /gm).map(blog => {
                     console.log(blog)
                     if (blog.trim()) {
-                        const content = marked.parse('# ' + blog);
+                        const content = marked.parse('## ' + blog);
                         return `<article>${content}</article>`;
                     }
                 }).join('');
@@ -64,7 +64,7 @@
                     article.id = `blog${index + 1}`;
                     const menuItem = document.createElement('a');
                     menuItem.href = `#${article.id}`;
-                    menuItem.textContent = article.querySelector('h1').textContent;
+                    menuItem.textContent = article.querySelector('h2').textContent;
                     menuItem.classList.add('blog-link');
 
                     // Add the menu item to the menu container

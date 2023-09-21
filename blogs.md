@@ -1,10 +1,10 @@
-# 查看cpu架构
+## 查看cpu架构
 
 ```
 lscpu | less
 ```
 
-# ubuntu开机进入命令行
+## ubuntu开机进入命令行
 
 Ubuntu或者Lubuntu开机后无限重载，左上角显示闪烁的小光标。
 
@@ -13,20 +13,20 @@ Ubuntu或者Lubuntu开机后无限重载，左上角显示闪烁的小光标。
 1.  选择系统界面选择`Ubuntu`，按`e`
 2.  在倒数第2行的最后加上`3`, 按`F10`
 
-# ubuntu开机黑屏
+## ubuntu开机黑屏
 
 1. 选择系统界面选择`Ubuntu(Advanced)`
 2. 选择`recovery mode`
 3. 选择`dpkg  Repair broken packages`
 
-# ubuntu修改终端字体
+## ubuntu修改终端字体
 
     ls /usr/share/consolefonts
     setfont Uni3-TerminusBold32x16.psf.gz
     echo 'setfont 字体名字'  >> /etc/profile
     
 
-# ubuntu加快开机速度
+## ubuntu加快开机速度
 
 检查开机速度
 
@@ -41,7 +41,7 @@ Ubuntu或者Lubuntu开机后无限重载，左上角显示闪烁的小光标。
     sudo apt remove snapd
 
 
-# 蓝牙
+## 蓝牙
 
 ```sh
 sudo hciconfig -a  # 列出蓝牙硬件
