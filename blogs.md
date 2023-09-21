@@ -1,4 +1,4 @@
-## 查看cpu架构
+# 查看cpu架构
 
 ```
 lscpu | less
@@ -13,7 +13,7 @@ Ubuntu或者Lubuntu开机后无限重载，左上角显示闪烁的小光标。
 1.  选择系统界面选择`Ubuntu`，按`e`
 2.  在倒数第2行的最后加上`3`, 按`F10`
 
-## ubuntu开机黑屏
+# ubuntu开机黑屏
 
 1. 选择系统界面选择`Ubuntu(Advanced)`
 2. 选择`recovery mode`
